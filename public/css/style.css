@@ -1,3 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:wght@700&family=Roboto:wght@400;700&display=swap');
+
+* {
+    font-family: 'Roboto', sans-serif;
+}
+
 body {
     background-color: #FFFFFF;
     width: 1025px;
@@ -6,7 +12,7 @@ body {
 .teclado {
     margin-top: 70px;
     margin-left: 211px;
-    width: 750px;
+    width: 700px;
     height: 91px;
     display: flex;
     flex-wrap: wrap;
@@ -40,7 +46,7 @@ img {
   height: 466px;
 }
 
-button {
+.escolher {
   margin-left: 334px;
   margin-top: 90px;
   width: 200px;

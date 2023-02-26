@@ -1,9 +1,12 @@
 
 function Letra(props){
     return(
-        <div  data-test="letter" className="letra">
-              {props.l}
-        </div>
+        <>
+        <button  data-test="letter" className="letra" >
+              {props.letras}
+        </button>
+        </>
     );
+    
 }
 export default Letra;
