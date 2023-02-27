@@ -2,6 +2,7 @@
 function Letra({
     letras,
     checarLetra,
+    entrarJogo
     }){
         
     return(

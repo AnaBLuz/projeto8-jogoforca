@@ -4,7 +4,7 @@ import Letra from './Letra';
 const alfabeto = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]
 
 function Teclado( 
-  {iniciarJogo,
+  {entrarJogo,
   botaoClicado,
   checarLetra}) {
     return (
@@ -12,7 +12,7 @@ function Teclado(
         <>
         {alfabeto.map((l, index) => <Letra
         key={index}
-        iniciarJogo={iniciarJogo}
+        entrarJogo={entrarJogo}
         letras={l}
         botaoClicado={botaoClicado}
         checarLetra={checarLetra}

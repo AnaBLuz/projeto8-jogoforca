@@ -7,24 +7,23 @@ import imagem5 from '../assets/img/forca5.png';
 import imagem6 from '../assets/img/forca6.png';
 
 function Jogo({
-    iniciarJogo,
-    renderizarPalavras,
+    entrarJogo,
+    mostrarPalavra,
     chutarLetra,
     erro,
-    palavraAcertada,
-    inicioJogo,
+    inicializar,
     qntErroMax,
+    palavraAcertada
     }) {
         const forcas = [imagem0, imagem1, imagem2, imagem3, imagem4, imagem5, imagem6];
    return(
     <>
     <div className="imgbotao">
       <img data-test="game-image" src={forcas[erro]} alt="imagem da forca"/>
-      <button data-test="choose-word" className='escolher' onClick={inicioJogo}>{iniciarJogo ? "Mudar Palavra" : "Escolher Palavra"}</button>
+      <button data-test="choose-word" className='escolher' onClick={inicializar}>{entrarJogo ? "Mudar Palavra" : "Escolher Palavra"}</button>
     </div>
-    <p data-test="word" style={{display: renderizarPalavras.length <= 0 ? 'none' : "initial"}}
-      className={erro === qntErroMax ? 'errou' : palavraAcertada ? 'acertou' : 'normal'}>
-      {renderizarPalavras.map((l) => {return chutarLetra.includes(l) ? l : "_";})}
+    <p data-test="word" className={erro = qntErroMax ? 'vermelho': palavraAcertada ? 'verde': ''}>
+      {mostrarPalavra.map((l) => {return chutarLetra.includes(l) ? l : "_";})}
     </p>
     </>
 

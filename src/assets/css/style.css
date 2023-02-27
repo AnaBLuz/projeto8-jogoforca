@@ -34,6 +34,10 @@ body {
   margin-right: 12px;
   margin-bottom: 12px;
 }
+.habilitada {
+  background-color: #E1ECF4;  
+
+}
 
 .imgbotao {
   display: flex;
@@ -68,4 +72,14 @@ p {
   margin-left: 641px;
   letter-spacing:5px;
   font-size: 45px;
+  display: initial;
 }
+
+.vermelho{
+  color:red;
+}
+
+.verde {
+  color:green;
+}
+

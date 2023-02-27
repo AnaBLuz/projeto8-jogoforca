@@ -1,27 +1,22 @@
-
-import palavras from './palavras';
+import { useState } from 'react';
 import Jogo from './components/Jogo';
 import Teclado from './components/Teclado';
-import { useState } from 'react';
+import palavras from './palavras';
+
 
 
 function App() {
-  const [iniciarJogo, setIniciarJogo] = useState(false);
-  const [renderizarPalavras, setRenderizarPalavras] = useState([]);
+  const [entrarJogo, setEntrarJogo] = useState(false);
+  const [mostrarPalavra, setmostrarPalavra] = useState([]);
   const [chutarLetra, setChutarLetra] = useState([]);
   const [botaoClicado, setBotaoClicado] = useState([]);
   const [erro, setErro] = useState(0);
   const [palavraAcertada, setPalavraAcertada] = useState(false);
   const qntErroMax = 6;
 
-  function escolherPalavra(){
-    const embaralhar = Math.floor(Math.random() * palavras.length - 1);
-    const palavraSeparada = palavras[embaralhar].split('');
-    setRenderizarPalavras(palavraSeparada);
-}
-
-function inicioJogo(){
-        setIniciarJogo(true);
+  
+   function inicializar(){
+        setEntrarJogo(true);
         escolherPalavra();
         setChutarLetra([]);
         setBotaoClicado([]);
@@ -29,15 +24,21 @@ function inicioJogo(){
         setPalavraAcertada(false);
     }
 
+    function escolherPalavra(){
+      const embaralhar = Math.floor(Math.random() * palavras.length - 1);
+      const palavraSorteada = palavras[embaralhar].split('');
+      setmostrarPalavra(palavraSorteada);
+  }
+
   function terminarJogo(ganhou) {
       setPalavraAcertada(true);
-      !ganhou && setChutarLetra([...renderizarPalavras]);
-      setIniciarJogo(false);
+      !ganhou && setChutarLetra([...mostrarPalavra]);
+      setEntrarJogo(false);
   }
 
     function checarLetra(letra){
       setBotaoClicado([...botaoClicado, letra]);
-      const contemLetra = renderizarPalavras.includes(letra);
+      const contemLetra = mostrarPalavra.includes(letra);
       const letras = [...chutarLetra, letra]
           if (contemLetra) {
               setChutarLetra(letras);
@@ -48,8 +49,8 @@ function inicioJogo(){
                   terminarJogo(false);
               }
       }
-      const palavrasMostradas = [...renderizarPalavras];
-      const checarPalavras = palavrasMostradas.every((l) => letras.includes(l));
+      const palavrasMostradas = [...mostrarPalavra];
+      const checarPalavras = palavrasMostradas.map((l) => { return (letras.includes(l) ? true: false)});
       if (checarPalavras) {
         terminarJogo(true);
       }
@@ -58,18 +59,19 @@ function inicioJogo(){
   return (
     <div className="App">
       <Jogo 
-      iniciarJogo={iniciarJogo}
-      renderizarPalavras={renderizarPalavras}
+      entrarJogo={entrarJogo}
+      mostrarPalavra={mostrarPalavra}
       chutarLetra={chutarLetra}
       erro={erro}
       palavraAcertada={palavraAcertada}
-      inicioJogo={inicioJogo}
+      inicializar={inicializar}
       terminarJogo={terminarJogo}
       qntErroMax={qntErroMax}/>
       <Teclado
-      iniciarJogo={iniciarJogo}
+      entrarJogo={entrarJogo}
       botaoClicado={botaoClicado}
-      checarLetra = {checarLetra}       
+      checarLetra = {checarLetra}  
+           
       />
     </div>
   );
