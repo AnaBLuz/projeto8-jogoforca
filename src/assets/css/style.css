@@ -64,3 +64,8 @@ img {
   background-color: #27AE60;
   border-radius: 8px;
 }
+p {
+  margin-left: 641px;
+  letter-spacing:5px;
+  font-size: 45px;
+}

@@ -67,6 +67,8 @@ function inicioJogo(){
       terminarJogo={terminarJogo}
       qntErroMax={qntErroMax}/>
       <Teclado
+      iniciarJogo={iniciarJogo}
+      botaoClicado={botaoClicado}
       checarLetra = {checarLetra}       
       />
     </div>

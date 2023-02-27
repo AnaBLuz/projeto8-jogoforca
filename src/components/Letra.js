@@ -1,9 +1,13 @@
 
-function Letra(props){
+function Letra({
+    letras,
+    checarLetra,
+    }){
+        
     return(
         <>
-        <button  data-test="letter" className="letra" >
-              {props.letras}
+        <button  data-test="letter" className="letra" onClick={() => checarLetra(letras)}>
+              {letras}
         </button>
         </>
     );
