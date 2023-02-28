@@ -9,50 +9,66 @@ function App() {
   const [entrarJogo, setEntrarJogo] = useState(false);
   const [mostrarPalavra, setmostrarPalavra] = useState([]);
   const [chutarLetra, setChutarLetra] = useState([]);
-  const [botaoClicado, setBotaoClicado] = useState([]);
+  const [letraClicada, setLetraClicada] = useState([]);
   const [erro, setErro] = useState(0);
-  const [palavraAcertada, setPalavraAcertada] = useState(false);
-  const qntErroMax = 6;
-
+  const [corPalavra, setCorPalavra] = useState("preto")
+  const ErroLimite = 6;
+  const [desabilitado,setDesabilitado] = useState(true)
   
    function inicializar(){
         setEntrarJogo(true);
-        escolherPalavra();
+        sortearPalavra();
         setChutarLetra([]);
-        setBotaoClicado([]);
+        setLetraClicada([]);
         setErro(0);
-        setPalavraAcertada(false);
+        setCorPalavra('preto')
+        setDesabilitado(false)
+
     }
 
-    function escolherPalavra(){
+    function sortearPalavra(){
       const embaralhar = Math.floor(Math.random() * palavras.length - 1);
       const palavraSorteada = palavras[embaralhar].split('');
       setmostrarPalavra(palavraSorteada);
+      console.log(palavraSorteada)
   }
 
-  function terminarJogo(ganhou) {
-      setPalavraAcertada(true);
-      !ganhou && setChutarLetra([...mostrarPalavra]);
+  function FimJogo(ganhou) {
       setEntrarJogo(false);
+      setDesabilitado(true)
+    if(ganhou){
+      setCorPalavra('verde')
+    }
+    else{
+      setCorPalavra('vermelho')
+      setChutarLetra(mostrarPalavra)
+    }
   }
 
-    function checarLetra(letra){
-      setBotaoClicado([...botaoClicado, letra]);
-      const contemLetra = mostrarPalavra.includes(letra);
+  function testarLetra(letra){
+    
+    setLetraClicada([...letraClicada, letra]);
+      
       const letras = [...chutarLetra, letra]
-          if (contemLetra) {
+      const incluiLetra = mostrarPalavra.includes(letra);
+
+          if (incluiLetra) {
               setChutarLetra(letras);
           } else {
-              const quantidadeErros = erro + 1;
-              setErro(quantidadeErros);
-              if (quantidadeErros === qntErroMax) {
-                  terminarJogo(false);
+              const quantErros = erro + 1;
+              console.log(quantErros);
+              setErro(quantErros);
+              if (quantErros === ErroLimite) {
+                FimJogo(false)
+              
               }
       }
       const palavrasMostradas = [...mostrarPalavra];
-      const checarPalavras = palavrasMostradas.map((l) => { return (letras.includes(l) ? true: false)});
-      if (checarPalavras) {
-        terminarJogo(true);
+
+      const checarPalavra = palavrasMostradas.every((l) => letras.includes(l));
+
+      if (checarPalavra) {
+        FimJogo(true);
       }
   }
 
@@ -63,15 +79,12 @@ function App() {
       mostrarPalavra={mostrarPalavra}
       chutarLetra={chutarLetra}
       erro={erro}
-      palavraAcertada={palavraAcertada}
       inicializar={inicializar}
-      terminarJogo={terminarJogo}
-      qntErroMax={qntErroMax}/>
+      corPalavra={corPalavra}/>
       <Teclado
-      entrarJogo={entrarJogo}
-      botaoClicado={botaoClicado}
-      checarLetra = {checarLetra}  
-           
+      testarLetra = {testarLetra}   
+      desabilitado = {desabilitado}
+      chutarLetra = {chutarLetra}    
       />
     </div>
   );

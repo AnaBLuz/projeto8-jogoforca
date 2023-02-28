@@ -12,8 +12,7 @@ function Jogo({
     chutarLetra,
     erro,
     inicializar,
-    qntErroMax,
-    palavraAcertada
+    corPalavra
     }) {
         const forcas = [imagem0, imagem1, imagem2, imagem3, imagem4, imagem5, imagem6];
    return(
@@ -22,7 +21,7 @@ function Jogo({
       <img data-test="game-image" src={forcas[erro]} alt="imagem da forca"/>
       <button data-test="choose-word" className='escolher' onClick={inicializar}>{entrarJogo ? "Mudar Palavra" : "Escolher Palavra"}</button>
     </div>
-    <p data-test="word" className={erro = qntErroMax ? 'vermelho': palavraAcertada ? 'verde': ''}>
+    <p data-test="word" className={corPalavra}>
       {mostrarPalavra.map((l) => {return chutarLetra.includes(l) ? l : "_";})}
     </p>
     </>
